@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banana Captor</title>
+    <link rel="stylesheet" id='stylesheet' href="style.css">
+    <link rel="icon" type="images/x-icon" href="assets/purplebook.png">
+</head>
+<body>
+    <div class="container column center mid" style="height: 600px;">
+        <div class="container center mid" style="background-color: rgba(0, 0, 0, 0.89); width: 50%; border-radius: 5px;">
+            <p id="contador" style="color: white;">0</p>
+        </div>
+        <button class="farmButton" onclick="addBana()">Farm</button>
+        <button class="farmButton" onclick="melhoriaClick()" id="melhoria"></button>
+    </div>
+
+    <script>
+        var contador = document.getElementById('contador');
+        var melhoria = document.getElementById('melhoria');
+        var bana = 0;
+        let valorMelhoria = 5
+        let conta = 1;
+
+        function addBana(){
+            contador.innerHTML = "";
+            bana = bana + conta;
+            contador.innerHTML += `${bana}`
+        }
+
+        function melhoriaClick(){
+            if(bana >= valorMelhoria){
+                melhoria.innerHTML = "";
+                contador.innerHTML = "";
+                bana = bana - valorMelhoria
+                conta = conta + 1
+                melhoria.innerHTML += `comprar melhoria ${valorMelhoria} bananas`;
+                contador.innerHTML += `${bana}`
+                conta = conta + 1
+                valorMelhoria = valorMelhoria * 2
+            } else{
+                alert("Você não tem bananas o suficiente!")
+            }
+        }
+    </script>
+</body>
+</html>
