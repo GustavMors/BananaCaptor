@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +8,82 @@
     <link rel="stylesheet" id='stylesheet' href="style.css">
     <link rel="icon" type="images/x-icon" href="assets/purplebook.png">
 </head>
+
 <body>
     <div class="container column center mid" style="height: 600px;">
-        <div class="container center mid" style="background-color: rgba(0, 0, 0, 0.89); width: 50%; border-radius: 5px;">
+        <div class="container center mid"
+            style="background-color: rgba(0, 0, 0, 0.89); width: 50%; border-radius: 5px;">
             <p id="contador" style="color: white;">0</p>
         </div>
-        <button class="farmButton" onclick="addBana()">Farm</button>
-        <button class="farmButton" onclick="melhoriaClick()" id="melhoria"></button>
+        <button class="farmButton" onclick="addBana()">Produzir</button>
+        <button class="farmButton" onclick="melhoriaClick()" id="melhoria">Comprar Melhoria 10 bananas</button>
+        <button class="farmButton" onclick="validarAuto()" id="melhoriaAuto">Contratar mamaco 80 bananas</button>
     </div>
 
     <script>
         var contador = document.getElementById('contador');
         var melhoria = document.getElementById('melhoria');
-        var bana = 0;
-        let valorMelhoria = 5
-        let conta = 1;
+        var melhoriaAuto = document.getElementById('melhoriaAuto');
 
-        function addBana(){
+        var bana = 0;
+
+        var farmAutoCondition = false;
+
+        let valorMelhoria = 10;
+        let valorMelhoriaAuto = 80;
+        
+        let conta = 1;
+        let contaAuto = 0;
+
+        function addBana() {
             contador.innerHTML = "";
             bana = bana + conta;
             contador.innerHTML += `${bana}`
         }
 
-        function melhoriaClick(){
-            if(bana >= valorMelhoria){
+        function melhoriaClick() {
+            if (bana >= valorMelhoria) {
                 melhoria.innerHTML = "";
                 contador.innerHTML = "";
                 bana = bana - valorMelhoria
                 conta = conta + 1
+                valorMelhoria = valorMelhoria * 2
                 melhoria.innerHTML += `comprar melhoria ${valorMelhoria} bananas`;
                 contador.innerHTML += `${bana}`
-                conta = conta + 1
-                valorMelhoria = valorMelhoria * 2
-            } else{
+            } else {
                 alert("Você não tem bananas o suficiente!")
             }
         }
+
+        function validarAuto(){
+            if(bana >= valorMelhoriaAuto) {
+                if (farmAutoCondition == false){
+                farmAutoCondition = true
+                farmAuto();
+                validarAuto();
+            } else{
+                if(bana >= valorMelhoriaAuto) {
+                    melhoriaAuto.innerHTML = "";
+                    bana = bana - valorMelhoriaAuto
+                    valorMelhoriaAuto = valorMelhoriaAuto * 2
+                    contaAuto = contaAuto + 1;
+                    melhoriaAuto.innerHTML += `contratar mamaco ${valorMelhoriaAuto} bananas`;
+                } else {
+                    alert("Você não tem bananas o suficiente!")
+                }
+            }
+            } else {
+                alert("Você não tem bananas o suficiente!")
+            }
+        }
+
+        function farmAuto() {
+            contador.innerHTML = "";
+            bana = bana + contaAuto;
+            contador.innerHTML += `${bana}`
+            setTimeout(farmAuto, 10)
+        }
     </script>
 </body>
+
 </html>

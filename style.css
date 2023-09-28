@@ -27,6 +27,7 @@ body{
 
 /*props*/
 .farmButton{
+    margin: 2%;
     background-color: chocolate;
     border: none;
     padding: 3% 20%;
