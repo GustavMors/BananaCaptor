@@ -27,15 +27,35 @@ body{
 
 /*props*/
 .farmButton{
+    height: 7%;
+    width: 45%;
+    box-sizing: unset;
     margin: 2%;
     background-color: chocolate;
     border: none;
-    padding: 3% 20%;
+    padding: 2% 20%;
     border-radius: 15px;
     color: white;
     text-align: center;
 }
 
 .farmButton:active{
+    transform: translateY(3px);
+}
+
+.upgradeButton{
+    height: 40%;
+    width: 75%;
+    box-sizing: unset;
+    margin: 2%;
+    background-color: chocolate;
+    border: none;
+    padding: 2% 15%;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+}
+
+.upgradeButton:active{
     transform: translateY(3px);
 }
