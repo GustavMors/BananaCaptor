@@ -1,32 +1,32 @@
-body{
+body {
     background-color: rgba(0, 0, 0, 0.61);
 }
 
-.container{
+.container {
     display: flex;
 }
 
-.row{
+.row {
     flex-direction: row;
 }
 
-.column{
+.column {
     flex-direction: column;
 }
 
-.center{
+.center {
     display: flex;
     justify-content: center;
 }
 
-.mid{
+.mid {
     display: flex;
     align-items: center;
 }
 
 
 /*props*/
-.farmButton{
+.farmButton {
     height: 7%;
     width: 45%;
     box-sizing: unset;
@@ -39,23 +39,78 @@ body{
     text-align: center;
 }
 
-.farmButton:active{
+.farmButton:active {
     transform: translateY(3px);
 }
 
-.upgradeButton{
-    height: 40%;
+.upgradeButton {
+    height: 30%;
     width: 75%;
     box-sizing: unset;
     margin: 2%;
     background-color: chocolate;
     border: none;
-    padding: 2% 15%;
+    padding: 2% 10%;
     border-radius: 15px;
     color: white;
     text-align: center;
 }
 
-.upgradeButton:active{
+.upgradeButton:active {
     transform: translateY(3px);
+}
+
+.upgradeMiniButton {
+    height: 40px;
+    width: 120px;
+    box-sizing: unset;
+    margin: 2%;
+    background-color: blueviolet;
+    border: none;
+    padding: 2% 10%;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    overflow     : hidden;
+}
+
+.upgradeMiniButton:active {
+    transform: translateY(3px);
+}
+
+
+/*modal shop*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.80);
+    background-color: rgba(0, 0, 0, 0.80);
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.72);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

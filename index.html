@@ -11,22 +11,49 @@
 
 <body>
     <div class="container row center mid" style="height: 600px; width: 100%;">
-        <div class="container column center mid" style="height: 600px; width: 70%;">
-            <div class="container center mid" style="background-color: rgba(0, 0, 0, 0.89); width: 50%; border-radius: 5px;">
+        <a class="container column mid" style="height: 600px; width: 70%; justify-content: space-between;"
+            onclick="clickFarm()">
+            <div class="container center mid"
+                style="background-color: rgba(0, 0, 0, 0.89); width: 80%; border-radius: 5px;">
                 <p id="contador" style="color: white;">0</p>
             </div>
-            <button class="farmButton" onclick="clickFarm()">Produzir</button>
+            <div class="container row" style="justify-content: space-evenly; width: 100%;">
+                <p style="color: white;" id="mamacos">Mamacos: 0</p>
+                <p style="color: white;" id="producao">Produção: 1x</p>
+            </div>
+        </a>
+        <div class="container column"
+            style="height: 900px; width: 30%; margin-left: 10%; border: 2px solid black; height: 100%; background-color: rgba(0, 0, 0, 0.72); ">
+            <div class="container column center mid" style="height: 20%;">
+                <button class="upgradeButton" id="shopButton">Loja</button>
+            </div>
+            <div style="border-top: 3px solid white; margin: 10px;"></div>
+            <div class="container column" style="height: 100%;">
+               
+            </div>
         </div>
-        <div class="container column center mid" style="height: 900px; width: 30%; margin-left: 10%; border-left: 2px solid black; height: 100%; background-color: black; ">
-            <div class="container column center mid" style="height: 20%;">
-                <button class="upgradeButton" onclick="melhoriaClick()">Melhoria Produção</button>
-                <p style="color: white; margin-top: 1%; font-size: 120%;" id="melhoria">10 Bananas</p>
+        <div id="shopModal" class="modal">
+            <div class="modal-content">
+                <span class="close" style="margin-left: 5%;">&times;</span>
+                <div class="container row" style="justify-content: space-around; flex-wrap: wrap;">
+                    <div class="container column center mid" style="height: 20%;">
+                        <button class="upgradeMiniButton" onclick="melhoriaClick()">Melhoria Produção</button>
+                        <p style="color: white; margin-top: 1%; font-size: 120%;" id="melhoria">10 Bananas</p>
+                    </div>
+                    <div class="container column center mid" style="height: 20%;">
+                        <button class="upgradeMiniButton" onclick="validarAuto()">Contratar Mamaco</button>
+                        <p style="color: white; margin-top: 1%; font-size: 120%;" id="melhoriaAuto">80 Bananas</p>
+                    </div>
+                    <div class="container column mid" style="height: 20%;">
+                        <button class="upgradeMiniButton" onclick="validarAuto()">Melhoria Ferramentas</button>
+                        <p style="color: white; margin-top: 1%; font-size: 100%;" id="melhoriaAuto">100 Bananas</p>
+                    </div>
+                    <div class="container column mid" style="height: 20%;">
+                        <button class="upgradeMiniButton" onclick="validarAuto()">Melhoria Capacitação</button>
+                        <p style="color: white; margin-top: 1%; font-size: 100%;" id="melhoriaAuto">200 Bananas</p>
+                    </div>
+                </div>
             </div>
-            <div class="container column center mid" style="height: 20%;">
-                <button class="upgradeButton" onclick="validarAuto()">Contratar Mamaco</button>
-                <p style="color: white; margin-top: 1%; font-size: 120%;" id="melhoriaAuto">80 Bananas</p>
-            </div>
-            <div class="container" style="justify-self: flex-end; background-color: chartreuse; height: 10px; width: 10px;"></div>
         </div>
     </div>
 
@@ -34,6 +61,8 @@
         var contador = document.getElementById('contador');
         var melhoria = document.getElementById('melhoria');
         var melhoriaAuto = document.getElementById('melhoriaAuto');
+        var mamacos = document.getElementById('mamacos')
+        var producao = document.getElementById('producao')
 
         var bana = 0;
 
@@ -41,7 +70,7 @@
 
         let valorMelhoria = 10;
         let valorMelhoriaAuto = 80;
-        
+
         let conta = 1;
         let contaAuto = 0;
 
@@ -54,34 +83,40 @@
         function melhoriaClick() {
             if (bana >= valorMelhoria) {
                 melhoria.innerHTML = "";
+                producao.innerHTML = "";
                 contador.innerHTML = "";
                 bana = bana - valorMelhoria
                 conta = conta + 1
                 valorMelhoria = valorMelhoria * 2
                 melhoria.innerHTML += `${valorMelhoria} bananas`;
                 contador.innerHTML += `${bana}`
+                producao.innerHTML += `Produção: ${conta}x`
             } else {
                 alert("Você não tem bananas o suficiente!")
             }
         }
 
-        function validarAuto(){
-            if(bana >= valorMelhoriaAuto) {
-                if (farmAutoCondition == false){
-                farmAutoCondition = true
-                farmAuto();
-                validarAuto();
-            } else{
-                if(bana >= valorMelhoriaAuto) {
-                    melhoriaAuto.innerHTML = "";
-                    bana = bana - valorMelhoriaAuto
-                    valorMelhoriaAuto = valorMelhoriaAuto * 2
-                    contaAuto = contaAuto + 1;
-                    melhoriaAuto.innerHTML += `${valorMelhoriaAuto} bananas`;
+        function validarAuto() {
+            if (bana >= valorMelhoriaAuto) {
+                if (farmAutoCondition == false) {
+                    farmAutoCondition = true
+                    farmAuto();
+                    validarAuto();
                 } else {
-                    alert("Você não tem bananas o suficiente!")
+                    if (bana >= valorMelhoriaAuto) {
+                        contador.innerHTML = "";
+                        mamacos.innerHTML = "";
+                        melhoriaAuto.innerHTML = "";
+                        bana = bana - valorMelhoriaAuto
+                        contador.innerHTML += `${bana}`
+                        valorMelhoriaAuto = valorMelhoriaAuto * 2
+                        contaAuto = contaAuto + 1;
+                        melhoriaAuto.innerHTML += `${valorMelhoriaAuto} bananas`;
+                        mamacos.innerHTML += `Mamacos: ${contaAuto}`
+                    } else {
+                        alert("Você não tem bananas o suficiente!")
+                    }
                 }
-            }
             } else {
                 alert("Você não tem bananas o suficiente!")
             }
@@ -91,7 +126,24 @@
             contador.innerHTML = "";
             bana = bana + contaAuto;
             contador.innerHTML += `${bana}`
-            setTimeout(farmAuto, 2000)
+            setTimeout(farmAuto, 1000)
+        }
+    </script>
+    <script>
+        var modal = document.getElementById("shopModal");
+        var btn = document.getElementById("shopButton");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
 </body>
